@@ -17,10 +17,10 @@ final class Toast
 	public static function set(string $message, array $parameters = [], mixed $type = 'auto'): void
 	{
 		$icon = match ($type) {
-			Status::Info => 'symbols.info-circle',
-			Status::Success => 'symbols.check-circle',
-			Status::Warning => 'symbols.alert-triangle',
-			Status::Danger => 'symbols.alert-octagon',
+			Status::Info => 'info',
+			Status::Success => 'circle-check',
+			Status::Warning => 'triangle-alert',
+			Status::Danger => 'octagon-alert',
 			default => null,
 		};
 
