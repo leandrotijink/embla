@@ -19,8 +19,7 @@
    "autoload": {
       "psr-4": {
          "Rovota\\Embla\\": "src/"
-      },
-      "files": ["src/helpers.php"]
+      }
    },
    "extra": {
       "laravel": {

@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Carbon; @endphp
 @props(['name', 'default' => null])
 
 @php
@@ -6,7 +7,7 @@
 	}
 	foreach ($attributes as $key => $value) {
 		if (in_array($key, ['value', 'min', 'max'])) {
-			$attributes[$key] = moment($value)->format('Y-m-d');
+			$attributes[$key] = new Carbon($value)->format('Y-m-d');
 		}
 	}
 @endphp
@@ -14,5 +15,5 @@
 <input type="date" {{ $attributes->merge([
 	'id' => $name,
 	'name' => $name,
-	'value' => old($name, $default) !== null ? moment(old($name, $default))->format('Y-m-d') : ''
+	'value' => old($name, $default) !== null ? new Carbon(old($name, $default))->format('Y-m-d') : ''
 ]) }}>
