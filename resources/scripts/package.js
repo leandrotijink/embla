@@ -1,5 +1,3 @@
-import './dependencies/signature.min.js';
-
 const embla = new class Embla {
 	constructor() {
 		this.helpers = new class Helpers {
