@@ -20,14 +20,6 @@
 		transition: color .12s ease, background .12s ease, opacity .12s ease, box-shadow .12s ease;
 	}
 
-	svg {
-		&.icon {
-			flex-shrink: 0;
-			height: 1.625rem;
-			width: 1.625rem;
-		}
-	}
-
 	table {
 		@apply w-full;
 
