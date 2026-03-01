@@ -16,19 +16,9 @@ class Tab extends Fluent
 
 	// -----------------
 
-	public static function name(string $name): static
+	public static function route(string $name, array $parameters = []): static
 	{
-		return new static(['name' => $name]);
-	}
-
-	// -----------------
-
-	public function route(string $name, array $parameters = []): static
-	{
-		return $this->set('route', new Fluent([
-			'name' => $name,
-			'parameters' => $parameters,
-		]));
+		return new static(['route' => new Fluent(['name' => $name, 'parameters' => $parameters])]);
 	}
 
 	public function label(string $label): static
@@ -38,13 +28,11 @@ class Tab extends Fluent
 
 	// -----------------
 
-	public function badge($text = null, $args = [], string|null $style = null): static
+	public function badge($text = null, $args = []): static
 	{
 		return $this->set('badge', new Fluent([
 			'text' => $text,
-			'args' => $args,
-			'style' => $style
+			'args' => $args
 		]));
 	}
-
 }

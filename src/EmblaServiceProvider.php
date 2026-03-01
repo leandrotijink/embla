@@ -11,28 +11,20 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Fluent;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\View;
-use Rovota\Embla\Icons\IconManager;
 use Rovota\Embla\Tabs\TabsFacadeProxy;
 use Rovota\Embla\Tabs\TabsManager;
 
 class EmblaServiceProvider extends ServiceProvider
 {
-	/**
-	 * @return void
-	 */
 	public function register(): void
 	{
 		$this->mergeConfigFrom(
 			__DIR__.'/../config/embla.php', 'embla'
 		);
 
-		$this->bindIconFunctionality();
 		$this->bindTabsFunctionality();
 	}
 
-	/**
-	 * @return void
-	 */
 	public function boot(): void
 	{
 		View::macro('withOverlay', function (string $action, string|null $value = null) {
@@ -48,10 +40,6 @@ class EmblaServiceProvider extends ServiceProvider
 		// -----------------
 
 		$this->publishes([
-			__DIR__.'/../config/embla.php' => $this->app->configPath('embla.php'),
-		], 'embla-config');
-
-		$this->publishes([
 			__DIR__.'/../resources/styles' => $this->app->publicPath('vendor/embla/styles'),
 		], 'embla-styles');
 
@@ -65,15 +53,6 @@ class EmblaServiceProvider extends ServiceProvider
 	}
 
 	// -----------------
-
-	protected function bindIconFunctionality(): void
-	{
-		$this->app->singleton(IconManager::class, function ($app) {
-			return new IconManager(
-				$app->make('config')->get('embla.icons')
-			);
-		});
-	}
 
 	protected function bindTabsFunctionality(): void
 	{

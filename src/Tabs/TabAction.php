@@ -16,24 +16,13 @@ class TabAction extends Fluent
 
 	// -----------------
 
-	public static function name(string $name): static
+	public static function route(string $name, array $parameters = []): static
 	{
-		return new static(['name' => $name]);
-	}
-
-	// -----------------
-
-	public function route(string $name, array $parameters = []): static
-	{
-		return $this->set('route', new Fluent([
-			'name' => $name,
-			'parameters' => $parameters,
-		]));
+		return new static(['route' => new Fluent(['name' => $name, 'parameters' => $parameters])]);
 	}
 
 	public function icon(string $icon): static
 	{
 		return $this->set('icon', $icon);
 	}
-
 }
