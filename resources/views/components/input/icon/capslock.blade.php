@@ -1,1 +1,0 @@
-<span {{ $attributes->merge(['class' => 'px-2.5 *:scale-90 hidden [.visible]:block capslock', 'title' => __('Capslock is enabled.')]) }}>{{ $slot }}</span>
