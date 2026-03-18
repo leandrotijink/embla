@@ -277,19 +277,6 @@
 			}
 		}
 
-		&.range {
-			@apply appearance-none w-full h-1.5 bg-neutral-200 dark:bg-neutral-800 rounded-full;
-
-			&::-webkit-slider-thumb {
-				@apply appearance-none size-3.5 bg-neutral-400 dark:bg-neutral-600 rounded-full;
-				transition: all .15s ease;
-			}
-
-			&::-webkit-slider-thumb:hover {
-				@apply bg-neutral-600 dark:bg-neutral-400 rounded-full cursor-grab;
-			}
-		}
-
 		&.file {
 			@apply appearance-none block h-0 opacity-0 overflow-hidden w-0 absolute;
 		}

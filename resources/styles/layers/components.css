@@ -83,19 +83,6 @@
 		}
 	}
 
-	.context {
-		@apply grow w-full relative block px-4 py-3 rounded-md bg-neutral-100 dark:bg-neutral-800 border border-black/20 dark:border-white/20;
-
-		&[data-caption] {
-			@apply before:block;
-		}
-
-		&[data-caption]:before {
-			@apply font-bold mb-1.5 text-sm;
-			content: attr(data-caption);
-		}
-	}
-
 	.placeholder {
 		@apply flex justify-center text-center p-2 py-3.5 rounded-md border border-black/10 dark:border-white/10 text-black/50 dark:text-white/50 text-sm sm:text-base;
 		&.darkened {
