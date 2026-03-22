@@ -153,7 +153,7 @@
 			}
 
 			& > textarea {
-				@apply min-h-10 w-full;
+				@apply field-sizing-content max-h-150 w-full;
 			}
 
 			& > input, & > select {
