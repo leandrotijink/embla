@@ -8,7 +8,6 @@
 namespace Rovota\Embla\Utilities;
 
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Fluent;
 use Rovota\Embla\Data\Colors\Status;
 
 final class Toast
@@ -24,11 +23,11 @@ final class Toast
 			default => null,
 		};
 
-		Session::flash('toast', new Fluent([
+		Session::flash('toast', [
 			'message' => __($message, $parameters),
 			'type' => $type,
 			'icon' => $icon,
-		]));
+		]);
 	}
 
 	// -----------------
