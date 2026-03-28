@@ -12,10 +12,8 @@ use Rovota\Embla\Tabs\TabsFacadeProxy;
 
 final class Tabs extends Facade
 {
-
 	protected static function getFacadeAccessor(): string
 	{
 		return TabsFacadeProxy::class;
 	}
-
 }

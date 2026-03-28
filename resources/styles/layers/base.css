@@ -93,8 +93,7 @@
 	}
 
 	toast {
-		@apply mx-auto w-fit fixed inset-x-1 top-4 z-50 flex gap-4 justify-center items-center py-3 px-5 rounded-lg text-white dark:text-black font-medium shadow-lg;
-		@apply before:absolute after:absolute overflow-hidden;
+		@apply mx-auto w-fit fixed inset-x-1 top-4 z-50 flex gap-4 justify-center items-center py-3 px-5 rounded-lg text-white dark:text-black font-medium shadow-lg before:absolute after:absolute overflow-hidden;
 		transform: translateY(-100%);
 		transition: all .3s ease;
 		opacity: 0;
@@ -123,10 +122,6 @@
 
 		&.danger > svg {
 			@apply text-red-400 dark:text-red-500;
-		}
-
-		&.warning > svg {
-			@apply text-amber-400 dark:text-amber-500;
 		}
 	}
 
@@ -404,5 +399,4 @@
 			@apply table ring ring-black/10 dark:ring-white/10 rounded-lg md:rounded-xl;
 		}
 	}
-
 }

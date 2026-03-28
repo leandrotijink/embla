@@ -62,5 +62,4 @@ final class TabsManager
 			$this->actions->add($action);
 		}
 	}
-
 }

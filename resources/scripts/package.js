@@ -104,124 +104,16 @@ function updateFormElementUsingDirective(form, config, input) {
 	});
 }
 
-function fixDrawingCanvas(canvas, drawing) {
-	const ratio = Math.max(window.devicePixelRatio || 1, 1);
-
-	canvas.width = canvas.offsetWidth * ratio;
-	canvas.height = canvas.offsetHeight * ratio;
-	canvas.getContext("2d").scale(ratio, ratio);
-
-	drawing.fromData(drawing.toData());
-}
-
-function cloneCanvas(oldCanvas) {
-	const newCanvas = document.createElement('canvas');
-	const context = oldCanvas.getContext('2d', {willReadFrequently: true});
-	if (context) {
-		newCanvas.width = oldCanvas.width;
-		newCanvas.height = oldCanvas.height;
-		const newContext = newCanvas.getContext('2d', {willReadFrequently: true});
-		if (newContext) {
-			const imageData = context.getImageData(0, 0, oldCanvas.width, oldCanvas.height);
-			newContext.putImageData(imageData, 0, 0);
-		}
-
-	}
-
-	return newCanvas;
-}
-
-function dataUrlToFile(data, filename) {
-	let fragments = data.split(",");
-	let mime = fragments[0].match(/:(.*?);/)[1];
-	let content = atob(fragments[fragments.length - 1]);
-
-	let n = content.length;
-	let u8arr = new Uint8Array(n);
-
-	while (n--) {
-		u8arr[n] = content.charCodeAt(n);
-	}
-
-	return new File([u8arr], filename, {type: mime});
-}
-
 document.addEventListener('livewire:navigated', () => {
-	// -----------------
-	// Toast Messages
 
+	// Toast Messages
 	document.querySelectorAll('toast').forEach(toast => {
 		setTimeout(() => toast.classList.add('visible'), 100);
 		setTimeout(() => toast.classList.remove('visible'), 3200);
 		setTimeout(() => toast.remove(), 5000);
 	});
 
-	// -----------------
-	// Drawing
-
-	document.querySelectorAll('#drawing').forEach(element => {
-		element.getContext("2d", {willReadFrequently: true})
-
-		let input = null, options = {
-			penColor: element.dataset.pencil ?? '#000000',
-			backgroundColor: 'transparent',
-			minDistance: 3,
-		};
-
-		let canvas = new SignaturePad(element, options);
-
-		if (element.dataset.input !== null) {
-			input = document.querySelector(`input[name="${element.dataset.input}"]`);
-		}
-
-		// Correct scaling issues on a page load and resizing
-		fixDrawingCanvas(element, canvas);
-		window.onresize = function () {
-			fixDrawingCanvas(element, canvas);
-		}
-
-		let wrapper = element.parentNode;
-		let clearButton = wrapper.querySelector('#clear');
-
-		if (clearButton !== null) {
-			clearButton.addEventListener("click", () => {
-				if (input !== null) {
-					const transfer = new DataTransfer();
-
-					input.files = transfer.files;
-					input.dispatchEvent(new Event('change'));
-				}
-				canvas.clear();
-			});
-		}
-
-		// When an input is present, assign the drawing as an image.
-		if (input !== null) {
-			canvas.addEventListener("endStroke", () => {
-				let data = canvas.toData();
-				let originalHeight = element.scrollHeight;
-				let originalWidth = element.scrollWidth;
-				let clone = new SignaturePad(cloneCanvas(element));
-
-				clone._ctx.canvas.width = originalWidth;
-				clone._ctx.canvas.height = originalHeight;
-				clone.fromData(data);
-				clone.removeBlanks();
-
-				const file = dataUrlToFile(clone.toDataURL('image/png'), (input.name ?? 'drawing') + '.png');
-				const transfer = new DataTransfer();
-
-				transfer.items.add(file);
-
-				input.files = transfer.files;
-				input.dispatchEvent(new Event('change'));
-			});
-		}
-	});
-
-	// -----------------
 	// Inputs
-
 	document.querySelectorAll('input, textarea, select').forEach(input => {
 
 		let form = input.closest('form');
@@ -331,17 +223,6 @@ document.addEventListener('livewire:navigated', () => {
 			});
 		}
 
-		// Range input functionality
-		if (input.getAttribute('type') === 'range') {
-			let prefix = input.previousElementSibling;
-			if (prefix !== null) {
-				prefix.innerHTML = input.value;
-				input.addEventListener('input', () => {
-					prefix.innerHTML = input.value;
-				});
-			}
-		}
-
 		// Slug input functionality
 		if (input.hasAttribute('slugify')) {
 			let note = input.parentElement.nextElementSibling.querySelector('.slug');
@@ -395,9 +276,7 @@ document.addEventListener('livewire:navigated', () => {
 
 	});
 
-	// -----------------
 	// Table Sorting
-
 	document.querySelectorAll('[data-sortable]').forEach(table => {
 		let selected_trigger;
 		table.querySelectorAll('.sortable').forEach(trigger => {
@@ -461,18 +340,14 @@ document.addEventListener('livewire:navigated', () => {
 		});
 	});
 
-	// -----------------
 	// Fragment Identification
-
 	document.querySelectorAll('h2').forEach(heading => {
 		if (!heading.hasAttribute('id')) {
 			heading.setAttribute('id', embla.helpers.slugify(heading.textContent));
 		}
 	});
 
-	// -----------------
 	// Carousel Functionality
-
 	document.querySelectorAll('.carousel').forEach(carousel => {
 
 		let slides = carousel.querySelectorAll('.item');
@@ -536,9 +411,7 @@ document.addEventListener('livewire:navigated', () => {
 		}
 	});
 
-	// -----------------
 	// Standalone Fixes
-
 	if (window.matchMedia('(display-mode: standalone)').matches) {
 		if (document.title.includes(' - ')) {
 			document.title = document.title.split(' - ')[0].trim();
@@ -552,9 +425,7 @@ document.addEventListener('livewire:navigated', () => {
 		}
 	})
 
-	// -----------------
 	// Dialog Interactivity
-
 	if (window.self === window.top) {
 		document.querySelectorAll('[data-href]').forEach(link => {
 			link.setAttribute('tabindex', '0');

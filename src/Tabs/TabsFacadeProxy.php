@@ -9,7 +9,6 @@ namespace Rovota\Embla\Tabs;
 
 final class TabsFacadeProxy
 {
-
 	protected TabsManager $manager;
 
 	public function __construct(TabsManager $manager)
@@ -31,5 +30,4 @@ final class TabsFacadeProxy
 	{
 		$this->manager->addActions($actions);
 	}
-
 }

@@ -8,14 +8,9 @@
 namespace Rovota\Embla\Tabs;
 
 use Illuminate\Support\Fluent;
-use Illuminate\Support\Traits\Conditionable;
 
 class Tab extends Fluent
 {
-	use Conditionable;
-
-	// -----------------
-
 	public static function route(string $name, array $parameters = []): static
 	{
 		return new static(['route' => new Fluent(['name' => $name, 'parameters' => $parameters])]);
@@ -25,8 +20,6 @@ class Tab extends Fluent
 	{
 		return $this->set('label', $label);
 	}
-
-	// -----------------
 
 	public function badge($text = null, $args = []): static
 	{

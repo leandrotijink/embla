@@ -33,18 +33,6 @@ class EmblaServiceProvider extends ServiceProvider
 			return $this;
 		});
 
-		// -----------------
-
-		$this->publishes([
-			__DIR__.'/../resources/styles' => $this->app->publicPath('vendor/embla/styles'),
-		], 'embla-styles');
-
-		$this->publishes([
-			__DIR__.'/../resources/scripts' => $this->app->publicPath('vendor/embla/scripts'),
-		], 'embla-scripts');
-
-		// -----------------
-
 		Blade::anonymousComponentPath(__DIR__.'/../resources/views/components', 'embla');
 	}
 
